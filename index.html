@@ -10,7 +10,7 @@ viewport-fit=cover">
     <img id="pictureUrl">
     <p id="userId"><b>userId:</b> </p>
     <p id="displayName"><b>displayName:</b></p>
-    <p id="statusMessage"><b>statusMessage:/b> </p>
+    <p id="statusMessage"><b>statusMessage:</b> </p>
     <p id="decodedIDToken"><b>email:</b></p>
     <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
     <script>
@@ -26,6 +26,8 @@ viewport-fit=cover">
     await liff.init({liffId: "1657345952-QbM1WlBD", withLogin0nExternalBrowser: true })
     if (liff.isLoggedIn()){
     getUserProfile()
+      }else{
+          liff.logIn()
       }
     }
     main()
