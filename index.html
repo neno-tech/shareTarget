@@ -44,15 +44,14 @@ viewport-fit=cover">
       btnShare.style.display = "block"
     })
 
-    await liff.init({ liffd: "1657345952-QbM1WlBD" }, () => {
-      if (liff.isLoggedIn()) {
-        logIn()
-      } else {
-        liff.login();
-      }
-    }, err => console.error(err.code, error.message));
-    main();
-  }
+     await liff
+        .init({ liffId: "1657345952-QbM1WlBD" })
+        .then(() => {
+          main();
+        })
+        .catch((err) => {
+          console.error(err.code, error.message);
+        });
   async function getUserProfile() {
     const profile = await liff.getProfile()
     pictureUrl.src = profile.pictureurl
