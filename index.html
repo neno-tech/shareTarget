@@ -6,79 +6,30 @@
 viewport-fit=cover">
 <title>LIFF: LINE Front-end Framework</title>
 </head>
-<body id="body">
-<section id="profile">
-<img id="pictureUrl" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/LINE_logo.svg/1200px-LINE_logo.svg.png" width="25%">
-<p id="userId"></p>
-<p id="displayName"></p>
-<p id="statusMessage"></p>
-<p id="email"></p>
-</section>
-<section id="button">
-<button id="btnShare">Share Message</button>
-<button onclick="logOut()">Log out</button>
-</section>
-<script>
-  const body = document.getElementById("body")
-  const pictureUrl = document.getElementById("pictureUrl")
-  const userId = document.getElementById("userId")
-  const displayName = document.getElementById("displayName")
-  const statusMessage = document.getElementById("statusMessage")
-  const email = document.getElementById("email")
-  const btnShare = document.getElementById("btnShare")
-    function logOut() {
-      liff.logout()
-      window.location.reload()
+<body>
+    <img id="pictureUrl">
+    <p id="userId"><b>userId:</b> </p>
+    <p id="displayName"><b>displayName:</b></p>
+    <p id="statusMessage"><b>statusMessage:/b> </p>
+    <p id="decodedIDToken"><b>email:</b></p>
+    <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+    <script>
+    async function getUserprofile(){
+    const profile = await liff.getprofile()
+    document.getElementById("pictureUrl").src = profile.pictureUrl
+    document.getElementById("userId").append(profile.userId)
+    document.getElementById("statusMessage"). append(profile.statusMessage)
+    document.getElementById("displayName" ). append(profile.displayName)
+    document.getElementById("decodedIDToken").append(liff.getDecodedIDToken().email)
     }
-    function logIn() {
-      liff.login({redirectUri:"https://neno-tech.github.io/shareTarget/"})
-    }
-  async function main() {
-    liff.ready.then(() => {
-      if (liff.getOS === "android") {
-        body.style.backgroundColor = "#888888"
+    async function main(){
+    await liff.init({liffId: "1657345952-QbM1WlBD", withLogin0nExternalBrowser: true })
+    if (liff.isLoggedIn()){
+    getUserProfile()
       }
-      if (liff.isInclient()) {
-        getUserProfile()
-      }
-      btnShare.style.display = "block"
-    })
-
-     await liff
-        .init({ liffId: "1657345952-QbM1WlBD" })
-        .then(() => {
-          main();
-        })
-        .catch((err) => {
-          console.error(err.code, error.message);
-        });
-  async function getUserProfile() {
-    const profile = await liff.getProfile()
-    pictureUrl.src = profile.pictureurl
-    userId.innerHTML = "<b>userId: </b>" + profile.userId
-    displayName.innerHTML = "<b>displayName: </b>" + profile.displayName
-    statusMessage.innerHTML = "<b>statusMessage: </b>" + profile.statusMessage
-    email.innerHTML = "<b>email: </b>" + liff.getDecodedIbToken().email
-  }
-  async function shareMsg() {
-    const result = await liff.shareTargetpicker([
-      {
-        type: "text",
-        text: "'This msg was shared by LIFF"
-      }
-    ])
-    if (result) {
-      alert("Msg was shared!")
-    } else {
-      alert("ShareTargetPicker was cancelled by user")
     }
-    liff.closeWindow()
-
-    btnShare.onclick = () => {
-      shareMsg()
-    }
-  }
-</script>
-</body>
+    main()
+    </script>
+    </body>
 </html>
   
