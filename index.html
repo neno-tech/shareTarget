@@ -16,6 +16,7 @@ viewport-fit=cover">
 </section>
 <section id="button">
 <button id="btnShare">Share Message</button>
+  <button id="logout" onclick="logout()">logout/button>
 </section>
 <script>
   const body = document.getElementById("body")
@@ -25,7 +26,7 @@ viewport-fit=cover">
   const statusMessage = document.getElementById("statusMessage")
   const email = document.getElementById("email")
   const btnShare = document.getElementById("btnShare")
-function logOut() {
+    function logOut() {
       liff.logout()
       window.location.reload()
     }
