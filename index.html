@@ -25,7 +25,13 @@ viewport-fit=cover">
   const statusMessage = document.getElementById("statusMessage")
   const email = document.getElementById("email")
   const btnShare = document.getElementById("btnShare")
-
+function logOut() {
+      liff.logout()
+      window.location.reload()
+    }
+    function logIn() {
+      liff.login({redirectUri:"https://neno-tech.github.io/shareTarget/"})
+    }
   async function main() {
     liff.ready.then(() => {
       if (liff.getOS === "android") {
