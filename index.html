@@ -14,12 +14,12 @@ viewport-fit=cover">
     <p id="decodedIDToken"><b>email:</b></p>
     <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
     <script>
-    async function getUserprofile(){
+    async function getUserProfile(){
     const profile = await liff.getprofile()
     document.getElementById("pictureUrl").src = profile.pictureUrl
     document.getElementById("userId").append(profile.userId)
-    document.getElementById("statusMessage"). append(profile.statusMessage)
-    document.getElementById("displayName" ). append(profile.displayName)
+    document.getElementById("statusMessage").append(profile.statusMessage)
+    document.getElementById("displayName").append(profile.displayName)
     document.getElementById("decodedIDToken").append(liff.getDecodedIDToken().email)
     }
     async function main(){
